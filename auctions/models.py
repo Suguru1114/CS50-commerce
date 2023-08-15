@@ -13,3 +13,4 @@ class listing(models.Model):
 # class bids(models.Model):
 
 # class comments(models.Model):
+test
