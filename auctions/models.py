@@ -11,7 +11,8 @@ class Listing(models.Model):
     price = models.DecimalField() 
 
     def __str__(self):
-        return self.titile
+        return self.titile 
+    # string reprisentatioin 
 
 # class bids(models.Model):
 
