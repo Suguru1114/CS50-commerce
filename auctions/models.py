@@ -7,8 +7,8 @@ class User(AbstractUser):
 
 class Listing(models.Model):
     title = models.CharField(max_length=64, unique= True)
-    text_discription = models.CharField(max_digits=7,decimal_places=0) 
-    price = models.DecimalField() 
+    text_description = models.CharField(max_digits=7,decimal_places=0) 
+    price = models.DecimalField(max_digits=10,decimal_places=2) 
 
     def __str__(self):
         return self.titile 
@@ -17,3 +17,6 @@ class Listing(models.Model):
 # class bids(models.Model):
 
 # class comments(models.Model):
+
+# suguru pass
+# suguru1114
