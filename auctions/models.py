@@ -14,7 +14,7 @@ class Listing(models.Model):
         return self.title 
     # string reprisentatioin 
 
-class bids(models.Model):
+class Bids(models.Model):
     title = models.CharField(max_length=64, unique= True)
     price = models.DecimalField(max_digits=10,decimal_places=2) 
 
