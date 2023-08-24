@@ -82,6 +82,9 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'auctions.User'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# add this line to fix the error during migrations
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
