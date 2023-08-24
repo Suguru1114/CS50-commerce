@@ -2,8 +2,10 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
+
 class User(AbstractUser):
-    pass
+    first_name = models.TextField(max_length = 300)
+    last_name = models.TextField(max_length = 300)
 
 class Listing(models.Model):
     title = models.CharField(max_length=64, unique= True)
