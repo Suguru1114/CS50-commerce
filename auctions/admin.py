@@ -10,5 +10,5 @@ class ListingAdmin(admin.ModelAdmin):
     list_display= ("title","text_description","price")
 
 admin.site.register(User)
-admin.site.register(Listing, ListingAdmin) 
+admin.site.register(Listing) 
 admin.site.register(Bids)
