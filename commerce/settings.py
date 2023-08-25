@@ -82,8 +82,6 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'auctions.User'
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# add this line to fix the error during migrations
 
 
 # Password validation
@@ -123,3 +121,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
