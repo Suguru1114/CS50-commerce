@@ -22,7 +22,7 @@ class Bids(models.Model):
 
     def __str__(self):
         return f"{self.title}, {self.price}"
-
+# use f dtring
 
 
 
