@@ -11,6 +11,8 @@ class Listing(models.Model):
     title = models.CharField(max_length=64, unique= True)
     text_description = models.CharField(max_length=255) 
     price = models.DecimalField(max_digits=10,decimal_places=2) 
+    owner = models.Foreignkey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="user")
+    # isActive = models.BooleanField(default=True)
     # 52;41
     def __str__(self):
         return f"{self.title}"
