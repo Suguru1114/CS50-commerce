@@ -10,5 +10,5 @@ from .models import User, Listing, Bids
     # list_display= ("title","text_description","price")
 
 admin.site.register(User)
-admin.site.register(Listing ) 
+admin.site.register(Listing) 
 admin.site.register(Bids)
