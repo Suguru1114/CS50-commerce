@@ -11,6 +11,7 @@ class User(AbstractUser):
 class Category(models.Model):
     categoryName = models.CharField(max_length=50)
 
+
 class Listing(models.Model):
     title = models.CharField(max_length=64, unique= True)
     text_description = models.CharField(max_length=255) 
