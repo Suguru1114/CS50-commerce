@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import User, Listing, Category
+from .models import User, Listing, Bids
 
 # from django.contrib.auth.models import Listing, Bids 
 
@@ -10,8 +10,9 @@ from .models import User, Listing, Category
     # list_display= ("title","text_description","price")
 
 admin.site.register(User)
-admin.site.register(Category) 
+# admin.site.register(Category) 
 admin.site.register(Listing)
+admin.site.register(Bids)
 
 
 # superuser; suguru
