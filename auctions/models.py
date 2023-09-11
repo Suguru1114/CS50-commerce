@@ -8,8 +8,8 @@ class User(AbstractUser):
     # last_name = models.TextField(max_length = 300)
     pass
 
-# class Category(models.Model):
-#     categoryName = models.CharField(max_length=50)
+class Category(models.Model):
+    categoryName = models.CharField(max_length=50)
 
 
 class Listing(models.Model):
@@ -18,7 +18,7 @@ class Listing(models.Model):
     price = models.FloatField()
     inActive = models.BooleanField(default=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="user")
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, related_name="category")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True,null=True, related_name="category")
     # isActive = models.BooleanField(default=True)
     # 52;41
     # def __str__(self):
