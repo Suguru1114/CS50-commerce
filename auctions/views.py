@@ -76,4 +76,7 @@ def create_listing(request):
         form= ListingForm()
 
 
+    return render(request, 'auctions/create_listing.html', {'form': form})
+
+
     # add new listin gfunction here to able user to addd new listing 

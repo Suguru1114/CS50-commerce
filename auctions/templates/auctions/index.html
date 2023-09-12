@@ -1,9 +1,24 @@
- {% extends "auctions/layout.html" %}
+{% extends "auctions/layout.html" %}
 
-{% block body %}
+{% block title %}
+        Create Listing - Auctions
+{% endblock %} 
+
+<!-- {% block body %}
     <h2>Active Listings</h2>
 
-    <!-- this is lisy  part  -->
 
     TODO
+{% endblock %} -->
+
+{% block body %}
+    <h2>Create Listing</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Listing</button>
+    </form>
+
+    <a href="{% url 'index' %}">Back to Active Listings</a>
 {% endblock %}
