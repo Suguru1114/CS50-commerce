@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from .forms import ListingForm
+from .models import Listing, Category, Bid
 
 from .models import User
 
@@ -80,3 +81,9 @@ def create_listing(request):
 
 
     # add new listin gfunction here to able user to addd new listing 
+
+
+
+def active_listing(request):
+    listings = Listing.objects.all()
+    return render(request, "auctions/active_listing.html")
