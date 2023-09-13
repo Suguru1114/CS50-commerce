@@ -86,4 +86,4 @@ def create_listing(request):
 
 def active_listing(request):
     listings = Listing.objects.all()
-    return render(request, "auctions/active_listing.html")
+    return render(request, "auctions/active_listing.html", {'listings': listings})

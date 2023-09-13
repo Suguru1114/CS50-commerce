@@ -1,5 +1,12 @@
-<!-- <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create Listing</button>
-</form> -->
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listing</h2>
+    <ul>
+        {% for listing in listings %}
+            <li>{{ listing.title }} - {{listing.price}}</li>
+        {% empty %}
+            <li>No Listings available.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
