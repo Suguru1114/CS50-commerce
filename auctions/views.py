@@ -4,9 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import ListingForm
-from .models import Listing, Category, Bid
 
-from .models import User
+from .models import User, Listing, Category, Bid
 
 
 def index(request):
