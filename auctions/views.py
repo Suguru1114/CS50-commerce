@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import ListingForm
 from .models import Listing, Category, Bid
@@ -87,3 +87,20 @@ def create_listing(request):
 def active_listing(request):
     listings = Listing.objects.all()
     return render(request, "auctions/active_listing.html", {'listings': listings})
+
+
+def create_listing(request):
+    if request.method == 'POST':
+        form = ListingForm(request.POST)
+        if form.is_valid():
+            new_listing = form.save(commit=False)
+            new_listing.owner = request.user
+            # Assign the current user as the owner
+            new_listing.save()
+            return redirect('index')
+        # Redirect to the homepage or another page
+
+    else: 
+        form = ListingForm()
+
+    return render(request, 'auctions/create_listing.html', {'form':form})
