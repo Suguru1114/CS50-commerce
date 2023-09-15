@@ -63,21 +63,6 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
-def create_listing(request):
-    if request.method == 'POST':
-        form = ListingForm(request.POST)
-        if form.is_valid():
-            new_listing = form.save(commit=False)
-            new_listing.owner = request.user
-            new_listing.save()
-            return redirect('index')
-    
-    else:
-        form= ListingForm()
-
-
-    return render(request, 'auctions/create_listing.html', {'form': form})
-
 
     # add new listin gfunction here to able user to addd new listing 
 
