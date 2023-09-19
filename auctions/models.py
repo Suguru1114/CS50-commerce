@@ -32,17 +32,9 @@ class Bid(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
 
-# class Bids(models.Model):
-#     title = models.CharField(max_length=64, unique= True)
-#     price = models.DecimalField(max_digits=10,decimal_places=2) 
-
-    # def __str__(self):
-    #     return f"{self.title}, {self.price}"
-# use f dtring
-
-
-
-# class comments(models.Model):
-
 # suguru pass
 # suguru1114
+
+class Watchlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    listings = models.ManyToManyField('Listing')
