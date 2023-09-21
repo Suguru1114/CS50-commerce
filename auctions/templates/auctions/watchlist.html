@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Watchlist</title>
+</head>
+<body>
+    <h1>My Watchlist</h1>
+    
+    <ul>
+        <!-- Loop through and display watchlist items -->
+        {% for item in watchlist_items %}
+            <li>{{ item.title }}</li>
+        {% empty %}
+            <li>Your watchlist is empty.</li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{% url 'index' %}">Back to Main page</a>
+</body>
+</html>

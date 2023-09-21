@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import ListingForm
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .models import User, Listing, Category, Bid
 
@@ -96,3 +97,6 @@ def add_to_watchlist(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)
     request.user.watchlist_listings.add(listing)
     return redirect('active_listing')
+
+def watchlist():
+    return
