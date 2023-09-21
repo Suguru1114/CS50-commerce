@@ -7,7 +7,7 @@ from .forms import ListingForm
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .models import User, Listing, Category, Bid
+from .models import User, Listing, Category, Bid, Watchlist
 
 
 def index(request):
@@ -98,5 +98,12 @@ def add_to_watchlist(request, listing_id):
     request.user.watchlist_listings.add(listing)
     return redirect('active_listing')
 
-def watchlist():
-    return
+def watchlist(request):
+
+    if request.user.is_authenticated:
+        # Retrieve the user's watchlist items here, assuming you have a Watchlist model
+        user_watchlist = Watchlist.objects.filter(user=request.user)
+    else:
+        user_watchlist = []  # Empty list if the user is not authenticated
+
+    return render(request, "auctions/watchlist.html", {'user_watchlist':user_watchlist})
