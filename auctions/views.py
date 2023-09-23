@@ -95,7 +95,11 @@ def create_listing(request):
 
 def add_to_watchlist(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)
-    request.user.watchlist_listings.add(listing)
+    
+    if request.user.is_authenticated:
+        user_watchlist, created = Watchlist.objects.get_or_create(user=request.user)
+        user_watchlist.listings.add(listing)
+    
     return redirect('active_listing')
 
 def watchlist(request):
