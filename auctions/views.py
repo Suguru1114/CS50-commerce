@@ -100,14 +100,14 @@ def add_to_watchlist(request, listing_id):
         user_watchlist, created = Watchlist.objects.get_or_create(user=request.user)
         user_watchlist.listings.add(listing)
     
-    return redirect('active_listing')
+    return redirect('watchlist')
 
 def watchlist(request):
-
     if request.user.is_authenticated:
         # Retrieve the user's watchlist items here, assuming you have a Watchlist model
-        user_watchlist = Watchlist.objects.filter(user=request.user)
+        user_watchlist = Watchlist.objects.get(user=request.user)
+        watchlist_items = user_watchlist.listings.all()
     else:
-        user_watchlist = []  # Empty list if the user is not authenticated
+        watchlist_items = []  # Empty list if the user is not authenticated
 
-    return render(request, "auctions/watchlist.html", {'user_watchlist':user_watchlist})
+    return render(request, "auctions/watchlist.html", {'watchlist_items': watchlist_items})
