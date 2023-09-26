@@ -7,16 +7,21 @@
 </head>
 <body>
     <h1>My Watchlist</h1>
-    
-    <ul>
-        <!-- Loop through and display watchlist items -->
-        {% for item in watchlist_items %}
-            <li>{{ item.title }}</li>
-        {% empty %}
-            <li>Your watchlist is empty.</li>
-        {% endfor %}
-    </ul>
-    
-    <a href="{% url 'index' %}">Back to Main page</a>
+<ul>
+    {% for item in watchlist_items %}
+        <li>
+            {{ item.title }}
+            <form method="POST" action="{% url 'remove_from_watchlist' item.id %}">
+                {% csrf_token %}
+                <button type="submit">Remove from Watchlist</button>
+            </form>
+        </li>
+    {% empty %}
+        <li>Your watchlist is empty.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'index' %}">Back to Main page</a>
+
 </body>
 </html>

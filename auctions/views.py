@@ -111,3 +111,12 @@ def watchlist(request):
         watchlist_items = []  # Empty list if the user is not authenticated
 
     return render(request, "auctions/watchlist.html", {'watchlist_items': watchlist_items})
+
+def remove_from_watchlist(request, item_id):
+    item = get_object_or_404(Listing, pk=item_id)
+    
+    if request.user.is_authenticated:
+        user_watchlist = Watchlist.objects.get(user=request.user)
+        user_watchlist.listings.remove(item)
+    
+    return redirect('watchlist')
