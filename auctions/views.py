@@ -6,7 +6,7 @@ from django.urls import reverse
 from .forms import ListingForm
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 from .models import User, Listing, Category, Bid, Watchlist
 
 
@@ -94,11 +94,14 @@ def create_listing(request):
      })
 
 def add_to_watchlist(request, listing_id):
+    if not request.user.is_authenticated:
+        messages.error(request, "You must be logged in to add items to your watchlist.")
+        return redirect('login')  # Redirect to the login page or any other appropriate page
+
     listing = get_object_or_404(Listing, pk=listing_id)
-    
-    if request.user.is_authenticated:
-        user_watchlist, created = Watchlist.objects.get_or_create(user=request.user)
-        user_watchlist.listings.add(listing)
+
+    user_watchlist, created = Watchlist.objects.get_or_create(user=request.user)
+    user_watchlist.listings.add(listing)
     
     return redirect('watchlist')
 

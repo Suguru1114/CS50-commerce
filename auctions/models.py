@@ -20,6 +20,12 @@ class Listing(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="user")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True,null=True, related_name="category")
     image_url = models.URLField(blank=True, null=True)
+
+    starting_bid = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    current_highest_bid = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    current_highest_bidder = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    watchlist_users = models.ManyToManyField(User,related_name='watchlist_listings', blank=True)
     # isActive = models.BooleanField(default=True)
     # 52;41
     # def __str__(self):
@@ -30,6 +36,7 @@ class Bid(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     bidder = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
+    
     timestamp = models.DateTimeField(auto_now_add=True)
 
 # suguru pass
