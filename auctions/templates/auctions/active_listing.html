@@ -5,6 +5,9 @@
     <ul>
         {% for listing in listings %}
             <li>{{ listing.title }} - {{listing.price}}
+
+                <!-- add bids function here -->
+
                 <form method="POST" action="{% url 'add_to_watchlist' listing.id %}">
                     {% csrf_token %}
                     <button type="submit">Add to Watchlist</button> 
