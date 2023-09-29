@@ -123,3 +123,31 @@ def remove_from_watchlist(request, item_id):
         user_watchlist.listings.remove(item)
     
     return redirect('watchlist')
+
+from django.shortcuts import get_object_or_404, redirect
+
+def place_bid(request, listing_id):
+    listing = get_object_or_404(Listing, pk=listing_id)
+    form = BidForm(request.POST)
+
+    if form.is_valid():
+        bid_amount = form.cleaned_data['bid_amount']
+
+        if bid_amount > listing.current_highest_bid:
+            # Update the listing with the new highest bid
+            listing.current_highest_bid = bid_amount
+            listing.current_highest_bidder = request.user
+            listing.save()
+
+            # Create a new Bid record
+            bid = Bid(listing=listing, bidder=request.user, amount=bid_amount)
+            bid.save()
+
+            # Redirect to the listing detail page with a success message
+            return redirect('listing_detail', listing_id=listing.id)
+        else:
+            # Display an error message if the bid is not higher than the current highest bid
+            form.add_error('bid_amount', 'Your bid must be higher than the current highest bid.')
+
+    # Handle form errors or redirect to the listing detail page on failure
+    return render(request, 'listing_detail.html', {'listing': listing, 'form': form})
