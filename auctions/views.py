@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .forms import ListingForm
+from .forms import ListingForm, BidForm
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages

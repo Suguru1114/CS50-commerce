@@ -10,5 +10,7 @@ class ListingForm(forms.ModelForm):
 
         # i might need bids here =
 
-class BidForm(forms.Form):
-    bid_amount = forms.DecimalField(max_digits=10, decimal_places=4)
+class BidForm(forms.ModelForm):
+    class Meta:
+        model = Bid
+        fields = ['amount']
