@@ -151,3 +151,11 @@ def place_bid(request, listing_id):
 
     # Handle form errors or redirect to the listing detail page on failure
     return render(request, 'listing_detail.html', {'listing': listing, 'form': form})
+
+def listing_detail(request, listing_id):
+    listing = get_object_or_404(Listing, pk=listing_id)
+
+     # Create a bid form for this listing
+    bid_form = BidForm()
+
+    return render(request, 'auctions/listing_detail.html', {'listing': listing, 'bid_form': bid_form})
