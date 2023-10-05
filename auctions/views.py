@@ -131,7 +131,7 @@ def place_bid(request, listing_id):
     form = BidForm(request.POST)
 
     if form.is_valid():
-        bid_amount = form.cleaned_data['bid_amount']
+        bid_amount = form.cleaned_data['amount']
 
         if bid_amount > listing.current_highest_bid:
             # Update the listing with the new highest bid
