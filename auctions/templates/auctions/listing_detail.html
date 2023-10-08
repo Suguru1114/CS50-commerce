@@ -7,6 +7,7 @@
 {% block body %}
     <h2>{{ listing.title }}</h2>
     <p>Price: {{ listing.price }}</p>
+    <p>Current Highest Bid: {{ listing.current_highest_bid }}</p>
     <p>Description: {{ listing.text_description }}</p>
 
     <form method="post" action="{% url 'place_bid' listing.id %}">

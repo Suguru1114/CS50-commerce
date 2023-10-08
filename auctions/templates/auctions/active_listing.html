@@ -5,7 +5,7 @@
     <ul>
         {% for listing in listings %}
             <li>
-                <a href="{% url 'listing_detail' listing.id %}">{{ listing.title }}</a> - {{listing.price}}
+                <a href="{% url 'listing_detail' listing.id %}">{{ listing.title }}</a> - {{listing.current_highest_bid}}
 
                 <!-- add bids function here -->
 
@@ -23,3 +23,4 @@
 
     <a href="{% url 'active_listing' %}">Back to Main page</a>
 {% endblock %}
+ll
