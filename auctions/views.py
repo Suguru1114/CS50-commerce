@@ -8,6 +8,8 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import User, Listing, Category, Bid, Watchlist
+from django.core.exceptions import ValidationError
+from django.contrib import messages
 
 
 def index(request):
@@ -147,11 +149,11 @@ def place_bid(request, listing_id):
             return redirect('listing_detail', listing_id=listing.id)
         else:
             # Display an error message if the bid is not higher than the current highest bid
-            form.add_error('bid_amount', 'Your bid must be higher than the current highest bid.')
+            form.add_error('amount', 'Your bid must be higher than the current highest bid.')
+            # messages.error(request, 'Your bid must be higher than the current highest bid.')  # Add a message
 
     # Handle form errors or redirect to the listing detail page on failure
-    return render(request, 'listing_detail.html', {'listing': listing, 'form': form})
-
+    return render(request, 'auctions/listing_detail.html', {'listing': listing, 'form': form})
 
 def listing_detail(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)

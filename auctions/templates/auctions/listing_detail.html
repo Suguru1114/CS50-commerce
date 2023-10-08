@@ -6,7 +6,7 @@
 
 {% block body %}
     <h2>{{ listing.title }}</h2>
-    <p>Price: {{ listing.price }}</p>
+    <p>Original Price: {{ listing.price }}</p>
     <p>Current Highest Bid: {{ listing.current_highest_bid }}</p>
     <p>Description: {{ listing.text_description }}</p>
 
@@ -14,6 +14,10 @@
         {% csrf_token %}
         {{ bid_form.as_p }}
         <button type="submit">Place Bid</button>
+        
+        {% if bid_form.errors.amount %}
+            <div class="error-message">{{ bid_form.errors.amount }}</div>
+        {% endif %}
     </form>
 
     <a href="{% url 'active_listing' %}">Back to Active Listings</a>
