@@ -130,7 +130,7 @@ from django.shortcuts import get_object_or_404, redirect
 
 def place_bid(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)
-    form = BidForm(request.POST)
+    form = BidForm(request.POST or None)  # Create form instance
 
     if form.is_valid():
         bid_amount = form.cleaned_data['amount']
@@ -148,12 +148,12 @@ def place_bid(request, listing_id):
             # Redirect to the listing detail page with a success message
             return redirect('listing_detail', listing_id=listing.id)
         else:
-        #     # Display an error message if the bid is not higher than the current highest bid
+            # Display an error message if the bid is not higher than the current highest bid
             form.add_error('amount', 'Your bid must be higher than the current highest bid.')
-           
 
     # Handle form errors or redirect to the listing detail page on failure
     return render(request, 'auctions/listing_detail.html', {'listing': listing, 'form': form})
+
 
 def listing_detail(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)
