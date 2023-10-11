@@ -6,6 +6,15 @@
 
 {% block body %}
     <h2>{{ listing.title }}</h2>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <p>Original Price: {{ listing.price }}</p>
     <p>Current Highest Bid: {{ listing.current_highest_bid }}</p>
     <p>Description: {{ listing.text_description }}</p>
@@ -24,7 +33,6 @@
         
         <button type="submit">Place Bid</button>
     </form>
-    
 
     <a href="{% url 'active_listing' %}">Back to Active Listings</a>
 {% endblock %}
