@@ -147,12 +147,16 @@ def place_bid(request, listing_id):
 
             # Redirect to the listing detail page with a success message
             return redirect('listing_detail', listing_id=listing.id)
+        
         else:
             # Display an error message if the bid is not higher than the current highest bid
-            form.add_error('amount', 'Your bid must be higher than the current highest bid.')
+            # form.add_error('amount', 'Your bid must be higher than the current highest bid.')
+            
+            messages.error(request, 'Your bid must be higher than the current highest bid.')
 
-    # Handle form errors or redirect to the listing detail page on failure
-    return render(request, 'auctions/listing_detail.html', {'listing': listing, 'form': form})
+        # Handle form errors or redirect to the listing detail page on failure
+        # return render(request, 'auctions/listing_detail.html', {'listing': listing, 'form': form})
+    return redirect('listing_detail', listing_id=listing.id)
 
 
 def listing_detail(request, listing_id):
