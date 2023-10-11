@@ -9,7 +9,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import User, Listing, Category, Bid, Watchlist
 from django.core.exceptions import ValidationError
-from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
+
+
 
 
 def index(request):
@@ -126,7 +128,6 @@ def remove_from_watchlist(request, item_id):
     
     return redirect('watchlist')
 
-from django.shortcuts import get_object_or_404, redirect
 
 def place_bid(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)
