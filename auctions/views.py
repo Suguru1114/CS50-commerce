@@ -151,7 +151,7 @@ def place_bid(request, listing_id):
         
         else:
             # Display an error message if the bid is not higher than the current highest bid
-            # form.add_error('amount', 'Your bid must be higher than the current highest bid.')
+           
                messages.error(request, 'Your bid must be higher than the current highest bid.')
 
             
@@ -169,3 +169,17 @@ def listing_detail(request, listing_id):
     bid_form = BidForm()
 
     return render(request, 'auctions/listing_detail.html', {'listing': listing, 'bid_form': bid_form})
+
+
+def close_listing(request, listing_id):
+    listing = get_object_or_404(listing, pk=listing_id)
+    
+    if request.user == liating.owner:
+    
+        listing.is_closed = True
+        listing.save()
+
+        messages.success(request, 'The listing has been closed. Log in to the user page and see who won the bid.')
+
+
+    return redirect('listing_detail', listing_id=listing.id)
