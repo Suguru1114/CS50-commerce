@@ -174,7 +174,7 @@ def listing_detail(request, listing_id):
 def close_listing(request, listing_id):
     listing = get_object_or_404(listing, pk=listing_id)
     
-    if request.user == liating.owner:
+    if request.user == listing.owner:
     
         listing.is_closed = True
         listing.save()
