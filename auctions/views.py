@@ -1,10 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from .forms import ListingForm, BidForm
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import User, Listing, Category, Bid, Watchlist
@@ -172,7 +171,7 @@ def listing_detail(request, listing_id):
 
 
 def close_listing(request, listing_id):
-    listing = get_object_or_404(listing, pk=listing_id)
+    listing = get_object_or_404(Listing, pk=listing_id)
     
     if request.user == listing.owner:
     
