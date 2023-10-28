@@ -26,20 +26,25 @@
         </form>
     {% endif %}
     
-    <form method="post" action="{% url 'place_bid' listing.id %}">
-        {% csrf_token %}
-        
-        <!-- Display the amount form field with the error message next to it -->
-        <div class="form-group{% if bid_form.errors.amount %} has-error{% endif %}">
-            {{ bid_form.amount.label_tag }}
-            {{ bid_form.amount }}
-            {% if bid_form.errors.amount %}
-                <span class="help-block">{{ bid_form.errors.amount }}</span>
-            {% endif %}
-        </div>
-        
-        <button type="submit">Place Bid</button>
-    </form>
+    {% if not listing.is_closed %}
+        <form method="post" action="{% url 'place_bid' listing.id %}">
+            {% csrf_token %}
+            
+            <!-- Display the amount form field with the error message next to it -->
+            <div class="form-group{% if bid_form.errors.amount %} has-error{% endif %}">
+                {{ bid_form.amount.label_tag }}
+                {{ bid_form.amount }}
+                {% if bid_form.errors.amount %}
+                    <span class="help-block">{{ bid_form.errors.amount }}</span>
+                {% endif %}
+            </div>
+            
+            <button type="submit">Place Bid</button>
+        </form>
+
+    {% else %}
+        <p>This listing is closed.</p>
+    {% endif %}
 
     <a href="{% url 'active_listing' %}">Back to Active Listings</a>
 {% endblock %}
