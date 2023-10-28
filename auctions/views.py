@@ -167,6 +167,9 @@ def listing_detail(request, listing_id):
      # Create a bid form for this listing
     bid_form = BidForm()
 
+    if listing.is_closed and listing.current_highest_bidder == request.user:
+        messages.success(request, 'Congratulations! You have won the auction.')        
+    
     return render(request, 'auctions/listing_detail.html', {'listing': listing, 'bid_form': bid_form})
 
 
