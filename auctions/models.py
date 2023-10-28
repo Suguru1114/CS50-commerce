@@ -31,6 +31,7 @@ class Listing(models.Model):
     # def __str__(self):
     #     return f"{self.title}"
     # string reprisentatioin 
+    is_closed  = models.BooleanField(default=False)
 
 class Bid(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
