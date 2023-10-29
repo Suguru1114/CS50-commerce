@@ -3,10 +3,10 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .forms import ListingForm, BidForm
+from .forms import ListingForm, BidForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import User, Listing, Category, Bid, Watchlist
+from .models import User, Listing, Category, Bid, Watchlist, Comment
 from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404, redirect
 
@@ -167,11 +167,27 @@ def listing_detail(request, listing_id):
      # Create a bid form for this listing
     bid_form = BidForm()
 
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.user = request.user
+            comment.listing = listing
+            comment.save()
+            comment_form = CommentForm() 
+
+    comments = Comment.objects.filter(listing=listing)
+
+
     if listing.is_closed and listing.current_highest_bidder == request.user:
         messages.success(request, 'Congratulations! You have won the auction.')        
     
-    return render(request, 'auctions/listing_detail.html', {'listing': listing, 'bid_form': bid_form})
-
+    return render(request, 'auctions/listing_detail.html', {
+            'listing': listing,
+            'bid_form': bid_form,
+            'comment_form': comment_form,
+            'comments': comments,
+    })
 
 def close_listing(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)

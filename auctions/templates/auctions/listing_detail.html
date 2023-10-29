@@ -47,4 +47,30 @@
     {% endif %}
 
     <a href="{% url 'active_listing' %}">Back to Active Listings</a>
-{% endblock %}
+
+    <h3>Comments</h3>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <strong>{{ comment.user.username }}</strong> - {{ comment.created_at }}<br>
+                {{ comment.text }}
+            </li>
+        {% empty %}
+            <li>No comments yet.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Add a Comment</h3>
+    <form method="post" action="{% url 'listing_detail' listing.id %}">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Add Comment</button>
+    </form>
+
+</div>
+
+
+
+
+
+    {% endblock %}
