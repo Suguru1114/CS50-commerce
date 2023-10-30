@@ -176,6 +176,9 @@ def listing_detail(request, listing_id):
             comment.save()
             comment_form = CommentForm() 
 
+    else:
+        comment_form = CommentForm()
+
     comments = Comment.objects.filter(listing=listing)
 
 
