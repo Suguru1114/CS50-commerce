@@ -3,13 +3,14 @@ from django.db import models
 
 
 
+
 class User(AbstractUser):
     # first_name = models.TextField(max_length = 300)
     # last_name = models.TextField(max_length = 300)
     pass
 
-class Category(models.Model):
-    categoryName = models.CharField(max_length=50)
+# class Category(models.Model):
+#     categoryName = models.CharField(max_length=50)
 
 
 class Listing(models.Model):
@@ -18,7 +19,7 @@ class Listing(models.Model):
     price = models.FloatField()
     inActive = models.BooleanField(default=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="user")
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True,null=True, related_name="category")
+    # category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True,null=True, related_name="category")
     image_url = models.URLField(blank=True, null=True)
 
     starting_bid = models.DecimalField(max_digits=15, decimal_places=2, default=0.0)
@@ -32,6 +33,7 @@ class Listing(models.Model):
     #     return f"{self.title}"
     # string reprisentatioin 
     is_closed  = models.BooleanField(default=False)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, blank=True, null=True, related_name="listings")
 
 class Bid(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
@@ -52,3 +54,9 @@ class Comment(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Category(models.Model):
+    name = models.CharField(max_length=64, unique=True, default='Uncategorized')
+
+    def __str__(self):
+        return self.name
