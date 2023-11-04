@@ -21,8 +21,8 @@ class Listing(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True,null=True, related_name="category")
     image_url = models.URLField(blank=True, null=True)
 
-    starting_bid = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
-    current_highest_bid = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    starting_bid = models.DecimalField(max_digits=15, decimal_places=2, default=0.0)
+    current_highest_bid = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     current_highest_bidder = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     watchlist_users = models.ManyToManyField(User,related_name='watchlist_listings', blank=True)
