@@ -1,9 +1,10 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listing</h2>
-    <ul>
+    <h2 style="color: red;">Active Listing</h2>
+    <ul class="item-container" >
         {% for listing in listings %}
+
             <li>
                 <a href="{% url 'listing_detail' listing.id %}">{{ listing.title }}</a> - {{listing.current_highest_bid}}
 
@@ -23,4 +24,3 @@
 
     <a href="{% url 'active_listing' %}">Back to Main page</a>
 {% endblock %}
-ll

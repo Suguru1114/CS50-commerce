@@ -1,3 +1,16 @@
 body {
     padding: 10px;
 }
+
+.item-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item {
+    width: calc(50% - 10px); /* Adjust the width as needed */
+    margin: 5px; /* Add margin for spacing */
+    padding: 10px;
+    border: 1px solid #ddd; /* Add borders or styling as desired */
+    box-sizing: border-box;
+}
