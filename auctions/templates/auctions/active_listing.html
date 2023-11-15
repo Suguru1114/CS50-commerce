@@ -3,7 +3,12 @@
 {% block body %}
     <h2 class="active-listing-heading">Active Listing</h2>
     <ul>
-        {% for listing in listings %}
+    <div class="container">
+        <div class="row">
+            {% for listing in listings %}
+                <div class="col-md-4 mb-4">
+
+        
 
             <li>
                 <a href="{% url 'listing_detail' listing.id %}">{{ listing.title }}</a> - {{listing.current_highest_bid}}
@@ -19,8 +24,13 @@
             <!-- display title - price in active_listing page -->
         {% empty %}
             <li>No Listings available.</li>
-        {% endfor %}
+    
+
+                </div>
+            {% endfor %}
+        </div>
     </ul>
+    </div>
 
     <a href="{% url 'active_listing' %}">Back to Main page</a>
 {% endblock %}
